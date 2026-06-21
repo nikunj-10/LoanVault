@@ -1,164 +1,158 @@
-## LoanVault | USB-Secured Ornament Loan Management System
-![ChatGPT Image Jun 28, 2025, 06_22_57 PM](https://github.com/user-attachments/assets/81963d58-e40d-46b7-aca8-436e3ba5fee1)
 
+# LoanVault | USB-Secured Ornament Loan Management System
 
-A fully offline, USB-authenticated system for managing ornament-based loans. Built with React and Node.js, this project emphasizes data privacy, security through hardware tokens (USB), and smart automation for loan handling.
+![System Architecture](https://github.com/user-attachments/assets/81963d58-e40d-46b7-aca8-436e3ba5fee1)
 
-🧩 Project Highlights
-This system is designed to be used in environments where internet connectivity isn’t guaranteed, and data security is critical. It works entirely with local hardware (USB), encrypts all data, and only allows operations if the correct USB device is connected.Perfect! Here’s the updated `README.md` with everything you’ll need to publish a **developer-friendly**, **authentic-looking**, and professional GitHub project — including:
+## Overview
 
-* ✅ Polished intro
-* 🖼️ Optional banner placeholder
-* 🎞️ GIF demo section
-* 📦 Features
-* ⚙️ Setup instructions
-* 📁 Folder structure
-* 🤝 Contribution guidelines
-* 🪪 License
+LoanVault is a secure, offline-first ornament loan management platform designed for jewelry shops and small lending businesses. The system uses USB-based authentication and local SQLite databases to ensure customer data remains accessible only when an authorized USB device is connected.
+
+The application focuses on privacy, security, and reliability in environments where internet connectivity may be unavailable or undesirable.
 
 ---
 
-```markdown
-# USB-Secured Ornament Loan Management System
+## Key Features
 
-
-> 🔐 A secure, offline-first system for managing ornament-based loans using USB hardware authentication, AES encryption, and biometric login. Fully built with React, Node.js, and SQLite.
-
----
-
-![Project Banner – Optional Placeholder](https://via.placeholder.com/1200x400.png?text=USB+Loan+Management+System+%7C+React+%2B+Node+%2B+SQLite)
-
----
-
-## 🎞️ Demo Preview
-
-> *(Insert demo GIF here showing customer entry, USB detection, and QR slip generation)*  
-> Example tools to record: [Loom](https://www.loom.com), [Screenity](https://chrome.google.com/webstore/detail/screenity-screen-recorder/), [OBS Studio](https://obsproject.com)
+- USB-authenticated access control
+- SQLite-based local data storage
+- Customer onboarding with image capture
+- Automated loan amount calculation
+- Secure QR-based customer slips
+- PDF generation for loan records
+- Active and released customer tracking
+- Dashboard analytics and reporting
+- Role-based authentication and authorization
+- Offline-first architecture
 
 ---
 
-## 🔧 Features Overview
+## Technology Stack
 
-- 🔌 USB authentication using **WebUSB**
-- 🔐 AES-encrypted customer data saved directly on USB
-- 🧾 Auto-generated printable slips with secure QR codes
-- 📊 Dashboard with graphs: city-wise loans, trends, and more
-- 👤 Role-based admin access and login restrictions
-- 🧠 Smart loan calculation with live gold/silver rates
-- 📁 Manual entry for legacy customers
-- 📤 Export reports to Excel
-
----
-
-## ⚙️ Technologies Used
-
-| Layer      | Stack / Tools                            |
-|------------|-------------------------------------------|
-| Frontend   | React, Axios, WebUSB, Chart.js, WebAuthn |
-| Backend    | Node.js, Express, SQLite, crypto-js      |
-| QR/Print   | qrcode.react, PrintJS, react-to-print     |
-| Reporting  | ExcelJS                                   |
-| Security   | AES Encryption, USB Serial Validation     |
+| Layer | Technologies |
+|---------|---------|
+| Frontend | React, Axios, Chart.js, React Webcam |
+| Backend | Node.js, Express.js |
+| Database | SQLite |
+| Authentication | JWT, Bcrypt |
+| Reporting | PDFKit |
+| File Uploads | Multer |
+| Visualization | Chart.js |
 
 ---
 
-## 🧪 How It Works
+## System Architecture
 
-| Condition              | System Behavior                      |
-|------------------------|---------------------------------------|
-| USB Not Connected      | Block UI, show fake QR values         |
-| USB Connected          | Unlock actions, decrypt QR properly   |
-| QR Opened Outside App  | Shows fake values (undecryptable)     |
+The application follows a multi-tenant architecture where each authorized user operates on a dedicated SQLite database stored on a USB device.
+
+### Workflow
+
+1. User authenticates into the application.
+2. System verifies the presence of an authorized USB device.
+3. User-specific SQLite database is loaded from the USB.
+4. Customer and loan records are stored locally.
+5. Loan slips and reports are generated on demand.
+6. Data remains inaccessible when the authorized USB device is unavailable.
 
 ---
 
-## 🧭 Folder Structure
+## Core Modules
 
-```
+### Customer Management
 
-📦 usb-loan-management/
+- Customer registration
+- Photo capture and storage
+- Loan creation and updates
+- Loan release workflow
+
+### Loan Processing
+
+- Ornament-based valuation
+- Automated loan calculation
+- Interest tracking
+- Repayment management
+
+### Reporting
+
+- Customer PDF slips
+- Loan summaries
+- Dashboard analytics
+- City-wise loan distribution
+
+---
+
+## Project Structure
+
+```text
+loanvault/
 ├── backend/
-│   ├── server.js
 │   ├── routes/
-│   ├── usb-check.js
-│   └── utils/
-└── frontend/
-├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── App.jsx
-│   └── main.jsx
-
+│   ├── middleware/
+│   ├── uploads/
+│   └── app.cjs
+│
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   └── App.jsx
+│
+└── README.md
 ````
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
-- Node.js and npm installed
-- USB device with `mortgage.sqlite` DB file
-- Modern browser (Chrome) for WebUSB + WebAuthn support
+* Node.js
+* npm
+* Authorized USB device
+* SQLite database file
 
-### Steps
+### Installation
 
 ```bash
-# Clone the repo
-git clone https://github.com/<your-username>/usb-loan-management.git
-cd usb-loan-management
+git clone https://github.com/nikunj-10/LoanVault.git
 
-# Start backend
 cd backend
 npm install
-node server.js
+npm start
 
-# Start frontend
 cd ../frontend
 npm install
 npm run dev
-````
-
-Visit: [http://localhost:5173](http://localhost:5173)
-
----
-
-## ✅ Roadmap / To-Do
-
-* [ ] Mobile/Tablet responsive layout
-* [ ] Face verification with webcam
-* [ ] USB failover backup mechanism
-* [ ] Live sync (optional, using OneDrive/local LAN)
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Here’s how:
-
-1. Fork this repo
-2. Create your branch: `git checkout -b new-feature`
-3. Commit your changes: `git commit -m 'Add new feature'`
-4. Push to the branch: `git push origin new-feature`
-5. Create a pull request
-
----
-
-## 🪪 License
-
-This project is licensed under the **MIT License**.
-Feel free to use it, extend it, or build upon it with proper credits.
-
----
-
-## 👨‍💻 Developed By
-
-**Nikunj Agarwal**
-🔗 [LinkedIn](https://www.linkedin.com/in/nikunj-agarwal-326b562a4)
-💻 [GitHub](https://github.com/nikunj-10)
-
----
-
 ```
 
+### Local Access
 
+```text
+Frontend: http://localhost:5173
+Backend : http://localhost:4000
+```
+
+---
+
+## Future Enhancements
+
+* Face verification during loan release
+* Enhanced audit logging
+* Backup and recovery workflows
+* Mobile-responsive interface
+* Advanced reporting dashboards
+
+---
+
+## Author
+
+Nikunj Agarwal
+
+LinkedIn:
+https://www.linkedin.com/in/nikunj-agarwal-326b562a4
+
+GitHub:
+https://github.com/nikunj-10
+
+```
+```
